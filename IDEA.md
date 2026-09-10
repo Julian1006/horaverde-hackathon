@@ -71,20 +71,8 @@ color de la página cambie según lo limpia que esté la luz, porque así se ve
 rápido sin leer nada. Al acabar tiene que decirte una hora.
 
 **La tercera: que se pueda enseñar.** El bot de Discord, ordenar el código,
-hacer capturas y terminar el README. Y ensayar con el reloj, porque si no me
-paso de tiempo seguro.
-
-## La presentación
-
-Son 5 minutos. Más o menos así:
-
-Primero explico el problema, que la luz no contamina siempre igual. Luego cuento
-lo que pensé, que cambiar la hora no cuesta nada. Después enseño la web
-funcionando, que es la parte más larga y la más importante. Luego digo rápido
-cómo está hecho. Y al final para qué sirve y qué haría después.
-
-Si voy mal de tiempo quito la parte de cómo está hecho. La demo no la quito, que
-es lo que más convence.
+hacer capturas y terminar el README, para que se entienda sin que yo tenga
+que explicar nada.
 
 ## Cuándo estará bien
 
@@ -95,7 +83,7 @@ raras.
 
 ## Lo que puede salir mal
 
-Que la página de los datos se caiga justo cuando esté presentando. Voy a
+Que la página de los datos se caiga justo cuando lo esté enseñando. Voy a
 guardarme un ejemplo en un archivo para poder enseñarlo igual.
 
 Que no me dé tiempo del bot. Por eso lo he puesto el último. Si no llego, enseño
