@@ -1,0 +1,23 @@
+# Dependencias
+node_modules/
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Entorno y secretos
+.env
+.env.local
+*.key
+
+# Datos pesados / descargados
+data/raw/
+*.csv.gz
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
