@@ -1,108 +1,118 @@
-# La idea
+# Lo que voy a construir
 
-> Documento de la fase 3: consolidar la idea. Sirve para mantener la
-> concentración y no desviarse durante la implementación.
+Escribo esto para no desviarme. Cada vez que se me ocurra añadir algo, vuelvo
+aquí a mirar si cabe.
 
-## En una frase
+## La idea
 
-**HoraVerde te dice a qué hora conviene consumir electricidad para emitir menos
-CO2, sin pedirte que consumas menos.**
+HoraVerde te dice a qué hora conviene consumir electricidad para emitir menos
+CO2. Sin pedirte que consumas menos.
 
-## El problema concreto
+## Por qué creo que tiene sentido
 
-La intensidad de carbono de la red eléctrica —los gramos de CO2 que cuesta
-producir cada kilovatio-hora— **varía continuamente a lo largo del día** según la
-mezcla de fuentes que esté generando en ese momento.
+La intensidad de carbono de la red —los gramos de CO2 que cuesta producir cada
+kilovatio-hora— cambia todo el rato según lo que esté generando en ese momento.
+Si sopla viento, baja. Si hay que tirar de gas para cubrir el hueco, sube.
 
-Un dato real medido durante la definición de este proyecto: a las 22:30 UTC la
-red estaba a 79 gCO2/kWh con un 57,4 % de eólica, un índice "bajo". En horas de
-poco viento esa cifra sube varias veces.
+Lo comprobé antes de decidirme: a las 22:30 UTC la red estaba a 79 gCO2/kWh con
+un 57 % de eólica. En horas malas esa cifra se multiplica.
 
-El problema no es técnico, es de **información**. El dato existe y es público,
-pero no llega a quien toma la decisión de encender la lavadora.
+Lo que acabó de convencerme es que el problema no es técnico. El dato existe, es
+público y es gratis. Simplemente no le llega a la persona que está decidiendo si
+pone la lavadora ahora o después de cenar.
 
-## El insight
+## El razonamiento
 
-Hay dos formas de reducir las emisiones del consumo eléctrico:
+Para reducir las emisiones de tu consumo eléctrico solo hay dos caminos.
 
-1. **Consumir menos** — exige sacrificio, la gente se resiste, tiene un tope.
-2. **Consumir en otro momento** — no exige ningún sacrificio.
+Uno es consumir menos. Cuesta esfuerzo, la gente se resiste y además tiene un
+tope: hay cosas que no puedes dejar de hacer.
 
-Casi todo el discurso climático se centra en la primera. HoraVerde ataca la
-segunda, que está prácticamente sin explotar a nivel doméstico.
+El otro es consumir en otro momento. Ese no cuesta nada.
 
-**Consumos flexibles:** lavadora, lavavajillas, secadora, carga del coche
-eléctrico, carga de portátiles y baterías, tareas pesadas de ordenador,
-calentadores de agua. Nada de esto necesita ocurrir a una hora concreta.
+Casi todo el discurso climático va por el primer camino. El segundo está
+bastante desaprovechado en lo doméstico, y hay más cosas flexibles de las que
+parece: lavadora, lavavajillas, secadora, cargar el coche, cargar el portátil,
+el calentador de agua, cualquier tarea pesada del ordenador. Ninguna necesita
+pasar a una hora concreta.
 
-## Qué hace (alcance del MVP)
+## Qué va a hacer
 
-1. **Panel "ahora mismo"** — intensidad actual en gCO2/kWh, el índice
-   cualitativo (bajo/moderado/alto) y la mezcla de generación del momento.
-2. **Gráfica de 48 horas** — el pronóstico, para que se vea el patrón.
-3. **La recomendación** — la mejor franja de las próximas 24 h, la peor, y el
-   ahorro en CO2 de elegir bien. Este es el corazón del proyecto.
-4. **Bot de Discord** — comando que devuelve el estado actual y la recomendación.
+Cuatro cosas, y ninguna más.
 
-## Qué NO hace (fuera de alcance)
+Enseñar cuánto CO2 emite la red ahora mismo, con el índice cualitativo
+(bajo, moderado, alto) y de qué fuentes está saliendo esa electricidad.
 
-Delimitar esto es lo que permite terminar a tiempo.
+Una gráfica de las próximas 48 horas, para que se vea el patrón y no solo el
+número suelto.
 
-- ❌ Cuentas de usuario, login, base de datos
-- ❌ Histórico de consumo personal
-- ❌ Integración con electrodomésticos o enchufes inteligentes
-- ❌ Cobertura de múltiples países
-- ❌ App móvil
-- ❌ Notificaciones automáticas programadas (solo respuesta a comando)
+La recomendación: la mejor franja de las próximas 24 horas, la peor, y cuánto
+CO2 te ahorras eligiendo bien. Esto es lo importante del proyecto. Todo lo demás
+es contexto para que se entienda.
 
-Si sobra tiempo, lo primero que se añade son las notificaciones automáticas.
+Y un bot de Discord que conteste lo mismo cuando le preguntas.
 
-## Plan por lecciones
+## Qué no va a hacer
 
-### Lección 1 — Que funcione el dato
-- Entorno virtual y `requirements.txt`
-- Cliente de la API en un módulo aparte (`carbon_api.py`)
-- App Flask mínima con una ruta que muestre la intensidad actual
-- **Al final de la lección:** la web enseña un número real de la API
+Esta lista me importa más que la de arriba. Cada cosa que tacho aquí es tiempo
+que me queda para terminar lo otro.
 
-### Lección 2 — Que sirva para algo
-- Consumir el pronóstico de 48 h
-- Lógica que calcula la mejor y la peor franja y el ahorro
-- Plantilla Jinja con la gráfica y la recomendación
-- CSS: que el color de la página cambie según lo limpia que esté la red
-- **Al final de la lección:** la web recomienda una hora concreta
+Nada de cuentas de usuario ni base de datos. Nada de guardar tu histórico de
+consumo. Nada de conectarse a enchufes o electrodomésticos inteligentes. Un solo
+país. Nada de app móvil. Y nada de notificaciones automáticas programadas: el
+bot contesta cuando le preguntas y ya está.
 
-### Lección 3 — Que se pueda enseñar
-- Bot de Discord con comando de consulta
-- Repaso PEP8, README final, capturas
-- Ensayar el pitch cronometrado
-- **Al final de la lección:** proyecto presentable
+Si acabo antes de tiempo, cosa que dudo, lo primero que añadiría son las
+notificaciones.
 
-## Guion del pitch (5 minutos)
+## Cómo lo reparto
 
-| Tiempo | Contenido |
-|---|---|
-| 0:00–0:45 | El problema: la electricidad no siempre contamina lo mismo |
-| 0:45–1:30 | El insight: mover el consumo no cuesta nada |
-| 1:30–3:30 | **Demo en vivo** con datos reales del momento |
-| 3:30–4:15 | Cómo está construido: API + Flask + bot |
-| 4:15–5:00 | Impacto y siguiente paso |
+Tengo tres lecciones.
 
-**Regla:** la demo es lo que convence. Si hay que recortar, se recorta de la
-parte técnica, nunca de la demo.
+**La primera, que el dato llegue.** Montar el entorno virtual y el
+`requirements.txt`, y escribir un módulo aparte (`carbon_api.py`) que se encargue
+de hablar con la API. Encima de eso, una app Flask mínima con una ruta que
+enseñe la intensidad actual. Si al acabar la lección la web enseña un número de
+verdad venido de la API, voy bien.
 
-## Criterios de éxito
+**La segunda, que sirva para algo.** Traer el pronóstico de 48 horas, escribir la
+lógica que encuentra la mejor y la peor franja, y montar la plantilla Jinja con
+la gráfica y la recomendación. Quiero que el color de la página cambie según lo
+limpia que esté la red, porque así se entiende de un vistazo sin leer nada. Al
+acabar, la web tiene que recomendarte una hora concreta.
 
-- [ ] Muestra datos reales, no inventados ni fijos en el código
-- [ ] Da una recomendación concreta, no solo información
-- [ ] Combina dos módulos del curso (web + bot)
-- [ ] Se demuestra en vivo en menos de un minuto
-- [ ] Funciona sin configurar claves de API
+**La tercera, que se pueda enseñar.** El bot de Discord, repasar el PEP8, hacer
+capturas y rematar el README. Y ensayar el pitch con cronómetro, que si no me
+paso seguro.
 
-## Riesgos y planes B
+## El pitch
 
-| Riesgo | Plan B |
-|---|---|
-| La API se cae durante el pitch | Guardar una respuesta de ejemplo en JSON y poder servirla |
-| No da tiempo al bot de Discord | Es lo último del plan por eso: se entrega solo la web |
-| La gráfica se complica | Sustituir por una tabla o barras de CSS puro |
+Cinco minutos, más o menos repartidos así.
+
+Empiezo con el problema, que la electricidad no contamina siempre lo mismo, en
+unos tres cuartos de minuto. Luego el razonamiento: mover el consumo no cuesta
+nada. La demo en vivo con los datos del momento es la parte larga, unos dos
+minutos, y es donde me la juego. Después, deprisa, cómo está construido. Y cierro
+con el impacto y qué haría a continuación.
+
+Si voy mal de tiempo recorto la parte técnica. La demo no se toca, que es lo
+único que convence de verdad.
+
+## Cuándo diría que ha salido bien
+
+Si enseña datos reales y no números metidos a mano en el código. Si da una
+recomendación concreta en lugar de limitarse a informar. Si junta la web con el
+bot en vez de quedarse en un solo módulo del curso. Si se puede enseñar
+funcionando en menos de un minuto. Y si arranca sin tener que configurar ninguna
+clave de API.
+
+## Lo que puede salir mal
+
+Que la API se caiga justo durante el pitch. Voy a guardarme una respuesta de
+ejemplo en un JSON para poder servirla si pasa.
+
+Que no me dé tiempo al bot de Discord. Lo he puesto el último precisamente por
+eso: si se cae, entrego la web sola y no pasa nada.
+
+Que la gráfica se me complique más de la cuenta. Si veo que se me va de las
+manos, la cambio por una tabla o por barras de CSS a pelo.
