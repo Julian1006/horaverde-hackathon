@@ -1,89 +1,77 @@
 # HoraVerde
 
-**No consumas menos electricidad. Consúmela a otra hora.**
+La electricidad no contamina siempre lo mismo. Depende de si en ese momento
+está soplando el viento o si han tenido que encender las centrales de gas para
+cubrir el hueco.
 
-Proyecto del hackathon sobre cambio climático. HoraVerde consulta en tiempo real
-cuánto CO2 emite la electricidad de la red y te dice a qué hora conviene poner la
-lavadora, cargar el coche o lanzar esa tarea pesada del ordenador.
+HoraVerde mira ese dato en tiempo real y te dice a qué hora te conviene poner
+la lavadora.
 
----
+Es mi proyecto para el hackathon de cambio climático del bootcamp.
 
-## El problema
+## De dónde sale la idea
 
-La electricidad no siempre contamina lo mismo. Cuando hace viento y sol, la red
-se llena de renovables. Cuando no, entran a cubrir el hueco las centrales de gas.
-La diferencia entre la mejor y la peor hora del día puede ser de varias veces en
-gramos de CO2 por kilovatio-hora.
+Estuve dando vueltas a unas cuantas ideas (las dejé apuntadas en
+[docs/lluvia-de-ideas.md](docs/lluvia-de-ideas.md)) y casi todas acababan en lo
+mismo: pedirle a la gente que consuma menos. Eso ya está muy visto, y además
+cansa a todo el mundo.
 
-Casi nadie lo sabe, y quien lo sabe no tiene forma de consultarlo. Así que todos
-consumimos a la hora que nos viene bien, que a menudo es la peor.
+Buscando datos me encontré con que los operadores de red publican cuántos gramos
+de CO2 cuesta producir cada kWh, actualizado cada media hora. Y resulta que
+varía bastante a lo largo del día.
 
-## La solución
+Ahí estaba el proyecto. No hace falta consumir menos: con consumir a otra hora
+ya ganas algo. Y a nadie le importa que la lavadora termine a las tres de la
+mañana.
 
-Mover el consumo flexible a las horas limpias reduce emisiones **sin reducir el
-consumo ni pedir ningún sacrificio**. La ropa se lava igual de limpia a las 3 de
-la madrugada. Solo falta saber cuándo.
+## Qué enseña
 
-HoraVerde hace visible ese dato y lo convierte en una recomendación concreta:
+- Cuánto CO2 emite la red ahora mismo y de dónde sale esa electricidad
+  (eólica, gas, nuclear, solar...)
+- El pronóstico de las próximas 48 horas
+- La mejor y la peor franja para consumir, y cuánto te ahorras eligiendo bien
 
-1. **Ahora mismo** — cuánto CO2 emite cada kWh en este momento y qué mezcla de
-   fuentes lo está generando.
-2. **Las próximas 48 horas** — el pronóstico completo, para ver el patrón.
-3. **La recomendación** — la mejor franja horaria para consumir, y cuánto CO2
-   te ahorras respecto a la peor.
+Mientras escribía esto la red estaba a 79 gCO2/kWh con un 57 % de eólica.
+Dentro de unas horas será una cifra completamente distinta, y esa es justo la
+gracia del asunto.
 
-## Cómo funciona
+## Los datos
 
-```
-API de intensidad de carbono
-          |
-          v
-   Cliente Python  ->  Análisis: mejor y peor franja
-          |
-          +---> Web Flask (panel + gráfica)
-          |
-          +---> Bot de Discord (avisos al servidor)
-```
+Tiro de la [Carbon Intensity API](https://api.carbonintensity.org.uk/) del
+operador de red británico. Es gratis y no pide clave, que para un hackathon es
+exactamente lo que necesitas: cero tiempo perdido esperando credenciales.
 
-## Stack
+Lo malo es que solo cubre Gran Bretaña. Si algún día quisiera cubrir España
+habría que cambiar la fuente de datos, pero el resto del código valdría igual.
 
-- **Python** — lógica y análisis
-- **Flask + Jinja** — servidor web y plantillas
-- **HTML + CSS** — interfaz
-- **requests** — consumo de la API
-- **discord.py** — bot de avisos
-- **Entorno virtual** + **git/GitHub**
+Los tres endpoints que uso:
 
-## Fuente de datos
+- `/intensity` — lo que está pasando ahora mismo
+- `/intensity/{desde}/fw48h` — el pronóstico
+- `/generation` — de qué fuentes viene la electricidad en este momento
 
-[Carbon Intensity API](https://api.carbonintensity.org.uk/) del operador de red
-británico. **Abierta, gratuita y sin clave de API.**
+## Con qué está hecho
 
-Endpoints usados:
+Python y Flask, con plantillas Jinja y CSS escrito a mano. Para hablar con la
+API, requests. El bot de Discord, con discord.py.
 
-| Endpoint | Para qué |
-|---|---|
-| `/intensity` | Intensidad actual (gCO2/kWh) e índice |
-| `/intensity/{from}/fw48h` | Pronóstico de las próximas 48 horas |
-| `/generation` | Mezcla de generación: eólica, solar, gas, nuclear... |
+Todo son cosas del curso. La gracia estaba en juntar el módulo de web con el de
+bots en un mismo proyecto en vez de quedarme en uno solo.
 
-*Limitación conocida:* esta API cubre Gran Bretaña. La arquitectura es la misma
-para cualquier otro operador que publique estos datos.
+## Por dónde voy
 
-## Estado
+En definición. Tengo la idea cerrada y la API ya probada, pero el código
+todavía no está.
 
-**En desarrollo** — fase de definición completada.
-
-- [x] Repositorio e idea consolidada
+- [x] Idea consolidada y repo montado
 - [ ] Cliente de la API
-- [ ] Web Flask con el dato actual
-- [ ] Pronóstico y recomendación horaria
+- [ ] La web enseñando el dato de ahora mismo
+- [ ] El pronóstico y la recomendación de hora
 - [ ] Bot de Discord
-- [ ] Pitch
 
-## Instalación
+## Para arrancarlo
 
-> Pendiente: se completará cuando exista el código.
+Cuando haya algo que arrancar, será esto:
 
 ```bash
 git clone https://github.com/Julian1006/horaverde-hackathon.git
@@ -94,19 +82,8 @@ pip install -r requirements.txt
 python app.py
 ```
 
-## Estructura
+## Lo demás
 
-```
-hackathon-clima/
-├── README.md                  # Este archivo
-├── IDEA.md                    # La idea consolidada y el plan
-├── docs/
-│   └── lluvia-de-ideas.md     # Fase de generación de ideas
-└── .gitignore
-```
-
-## Documentación del proceso
-
-- [IDEA.md](IDEA.md) — qué construimos, qué no, y el plan por lecciones
-- [docs/lluvia-de-ideas.md](docs/lluvia-de-ideas.md) — las 6 candidatas y por qué
-  ganó esta
+En [IDEA.md](IDEA.md) está el plan repartido por lecciones y, sobre todo, la
+lista de cosas que he decidido **no** hacer. Sospecho que esa lista es la que va
+a decidir si llego a tiempo o no.
