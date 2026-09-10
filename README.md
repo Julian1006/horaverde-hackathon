@@ -1,76 +1,76 @@
 # HoraVerde
 
-La electricidad no contamina siempre lo mismo. Depende de si en ese momento
-está soplando el viento o si han tenido que encender las centrales de gas para
-cubrir el hueco.
+La luz no contamina siempre lo mismo. Depende de si hace viento o no.
 
-HoraVerde mira ese dato en tiempo real y te dice a qué hora te conviene poner
-la lavadora.
+Si hace viento, la electricidad viene de los molinos y casi no contamina. Si no
+hace viento, tienen que encender centrales de gas y entonces contamina mucho
+más.
 
-Es mi proyecto para el hackathon de cambio climático del bootcamp.
+HoraVerde mira eso y te dice a qué hora es mejor poner la lavadora.
 
-## De dónde sale la idea
+Lo estoy haciendo para el hackathon del curso. El tema es el cambio climático.
 
-Estuve dando vueltas a unas cuantas ideas y casi todas acababan en lo
-mismo: pedirle a la gente que consuma menos. Eso ya está muy visto, y además
-cansa a todo el mundo.
+## Cómo se me ocurrió
 
-Buscando datos me encontré con que los operadores de red publican cuántos gramos
-de CO2 cuesta producir cada kWh, actualizado cada media hora. Y resulta que
-varía bastante a lo largo del día.
+Al principio pensé otras ideas, pero casi todas eran para decirle a la gente que
+gaste menos luz. Eso ya lo dice todo el mundo y nadie hace mucho caso.
 
-Ahí estaba el proyecto. No hace falta consumir menos: con consumir a otra hora
-ya ganas algo. Y a nadie le importa que la lavadora termine a las tres de la
-mañana.
+Luego vi que hay páginas que dicen cuántos gramos de CO2 cuesta la luz, y que va
+cambiando cada media hora. Me pareció raro que nadie lo mire.
 
-## Qué enseña
+Entonces pensé: si la lavadora la puedes poner a cualquier hora, ponla cuando la
+luz esté limpia. No tienes que gastar menos, solo cambiar la hora. Y a nadie le
+molesta que la lavadora acabe de noche.
 
-- Cuánto CO2 emite la red ahora mismo y de dónde sale esa electricidad
-  (eólica, gas, nuclear, solar...)
-- El pronóstico de las próximas 48 horas
-- La mejor y la peor franja para consumir, y cuánto te ahorras eligiendo bien
+## Qué va a hacer
 
-Mientras escribía esto la red estaba a 79 gCO2/kWh con un 57 % de eólica.
-Dentro de unas horas será una cifra completamente distinta, y esa es justo la
-gracia del asunto.
+- Decirte cuánto contamina la luz ahora mismo
+- Decirte de dónde viene (viento, sol, gas, nuclear...)
+- Enseñar una gráfica de las próximas 48 horas
+- Decirte la mejor hora y la peor para gastar luz
 
-## Los datos
+Cuando escribí esto estaba a 79 gCO2 por kWh y el 57 % venía del viento. Dentro
+de un rato será otro número distinto.
 
-Tiro de la [Carbon Intensity API](https://api.carbonintensity.org.uk/) del
-operador de red británico. Es gratis y no pide clave, que para un hackathon es
-exactamente lo que necesitas: cero tiempo perdido esperando credenciales.
+## De dónde saco los datos
 
-Lo malo es que solo cubre Gran Bretaña. Si algún día quisiera cubrir España
-habría que cambiar la fuente de datos, pero el resto del código valdría igual.
+De esta página: https://api.carbonintensity.org.uk
 
-Los tres endpoints que uso:
+Es gratis y no hay que registrarse ni pedir ninguna contraseña, así que puedo
+usarla directamente. Eso está muy bien porque no pierdo tiempo esperando.
 
-- `/intensity` — lo que está pasando ahora mismo
-- `/intensity/{desde}/fw48h` — el pronóstico
-- `/generation` — de qué fuentes viene la electricidad en este momento
+Lo malo es que solo sirve para Reino Unido. Para España habría que buscar otra
+página, pero el código serviría casi igual.
 
-## Con qué está hecho
+Uso tres cosas de esa página:
 
-Python y Flask, con plantillas Jinja y CSS escrito a mano. Para hablar con la
-API, requests. El bot de Discord, con discord.py.
+- `/intensity` para lo de ahora mismo
+- `/intensity/{fecha}/fw48h` para las próximas 48 horas
+- `/generation` para saber de dónde viene la luz
 
-Todo son cosas del curso. La gracia estaba en juntar el módulo de web con el de
-bots en un mismo proyecto en vez de quedarme en uno solo.
+## Con qué lo hago
+
+Python y Flask, que es lo que hemos dado en el curso. Las páginas con HTML, CSS
+y plantillas Jinja. Para pedir los datos uso requests. Y el bot de Discord con
+discord.py.
+
+Quiero juntar la parte de la web con la del bot, porque así uso dos cosas del
+curso en vez de una sola.
 
 ## Por dónde voy
 
-En definición. Tengo la idea cerrada y la API ya probada, pero el código
-todavía no está.
+Todavía no hay código. Solo tengo la idea pensada y he probado que la página de
+los datos funciona.
 
-- [x] Idea consolidada y repo montado
-- [ ] Cliente de la API
-- [ ] La web enseñando el dato de ahora mismo
-- [ ] El pronóstico y la recomendación de hora
-- [ ] Bot de Discord
+- [x] La idea
+- [ ] Pedir los datos
+- [ ] La web
+- [ ] La gráfica y la recomendación
+- [ ] El bot de Discord
 
-## Para arrancarlo
+## Para abrirlo
 
-Cuando haya algo que arrancar, será esto:
+Cuando haya algo que abrir, será así:
 
 ```bash
 git clone https://github.com/Julian1006/horaverde-hackathon.git
@@ -81,8 +81,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-## Lo demás
+## Más cosas
 
-En [IDEA.md](IDEA.md) está el plan repartido por lecciones y, sobre todo, la
-lista de cosas que he decidido **no** hacer. Sospecho que esa lista es la que va
-a decidir si llego a tiempo o no.
+En [IDEA.md](IDEA.md) he apuntado el plan y también las cosas que **no** voy a
+hacer, para no liarme y no llegar tarde.
