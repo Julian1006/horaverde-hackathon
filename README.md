@@ -59,11 +59,12 @@ curso en vez de una sola.
 
 ## Por dónde voy
 
-Ya funciona la primera parte: pido los datos y salen en una página web.
+Todavía no hay código. Tengo la idea pensada y he comprobado que la página de
+los datos funciona.
 
 - [x] La idea
-- [x] Pedir los datos
-- [x] La web enseñando el dato de ahora mismo
+- [ ] Pedir los datos
+- [ ] La web
 - [ ] La gráfica y la recomendación
 - [ ] El bot de Discord
 
