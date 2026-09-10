@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HoraVerde</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
+</head>
+<body>
+    <h1>HoraVerde</h1>
+
+    <p class="explicacion">Ahora mismo la luz esta...</p>
+
+    <p class="numero">{{ ahora.gramos }}</p>
+    <p class="unidad">gramos de CO2 por kWh</p>
+
+    <p class="nivel">La luz esta <strong>{{ ahora.nivel }}</strong></p>
+
+    <h2>De donde viene</h2>
+    <ul class="fuentes">
+        {% for nombre, porcentaje in mezcla %}
+            {% if porcentaje > 0 %}
+                <li>
+                    <span class="fuente">{{ nombre }}</span>
+                    <span class="porcentaje">{{ porcentaje }} %</span>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <p class="pie">Datos de la Carbon Intensity API (Reino Unido)</p>
+</body>
+</html>

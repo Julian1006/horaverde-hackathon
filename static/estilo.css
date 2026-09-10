@@ -1,0 +1,66 @@
+body {
+    font-family: system-ui, sans-serif;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: #f4f6f4;
+    color: #223;
+    text-align: center;
+}
+
+h1 {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+
+.explicacion {
+    color: #667;
+}
+
+.numero {
+    font-size: 5rem;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1;
+    color: #2c7a4b;
+}
+
+.unidad {
+    margin-top: 6px;
+    color: #667;
+}
+
+.nivel {
+    font-size: 1.2rem;
+    margin: 24px 0 40px;
+}
+
+h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #667;
+}
+
+.fuentes {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.fuentes li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 4px;
+    border-bottom: 1px solid #dde;
+}
+
+.porcentaje {
+    font-weight: bold;
+}
+
+.pie {
+    margin-top: 40px;
+    font-size: 0.8rem;
+    color: #99a;
+}
