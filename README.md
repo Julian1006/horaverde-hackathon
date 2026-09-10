@@ -11,8 +11,7 @@ Es mi proyecto para el hackathon de cambio climático del bootcamp.
 
 ## De dónde sale la idea
 
-Estuve dando vueltas a unas cuantas ideas (las dejé apuntadas en
-[docs/lluvia-de-ideas.md](docs/lluvia-de-ideas.md)) y casi todas acababan en lo
+Estuve dando vueltas a unas cuantas ideas y casi todas acababan en lo
 mismo: pedirle a la gente que consuma menos. Eso ya está muy visto, y además
 cansa a todo el mundo.
 
