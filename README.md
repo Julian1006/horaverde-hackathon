@@ -86,8 +86,8 @@ para cualquier otro operador que publique estos datos.
 > Pendiente: se completará cuando exista el código.
 
 ```bash
-git clone <url-del-repo>
-cd hackathon-clima
+git clone https://github.com/Julian1006/horaverde-hackathon.git
+cd horaverde-hackathon
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
